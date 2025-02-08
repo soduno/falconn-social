@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons+Outlined');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons+Sharp');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons+Round');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons+Two+Tone');
+
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@400;500;600;700');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:wght@400;500;600;700');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:wght@400;500;600;700');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+label {
+  cursor: pointer;
+}
+
+body {
+  font-size: 14px;
+}
+
+/* :root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+} */

@@ -1,0 +1,96 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum LikeMethods {
+  HEART
+  THUMBS_DOWN
+  THUMBS_UP
+}
+
+enum ConnectionStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+  BLOCKED
+}
+
+model User {
+  id             Int       @id @default(autoincrement())
+  email          String    @unique
+  name           String
+  country        String?
+  password       String
+  activatedAt    DateTime?
+  activationHash String?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime? @updatedAt
+  deletedAt      DateTime?
+
+  tokens      Token[]
+  meta        Json?
+  userMeta    UserMeta[]
+  posts       Post[]
+  postLikes   PostLike[]
+  connections Connection[]
+}
+
+model UserMeta {
+  id     Int    @id @default(autoincrement())
+  key    String
+  value  String
+  userId Int
+  user   User   @relation(fields: [userId], references: [id])
+
+  @@unique([userId, key])
+}
+
+model Connection {
+  id           Int              @id @default(autoincrement())
+  remoteUserId Int
+  userId       Int
+  user         User             @relation(fields: [userId], references: [id])
+  status       ConnectionStatus @default(PENDING)
+}
+
+model Token {
+  id        Int       @id @default(autoincrement())
+  token     String    @unique
+  type      TokenType
+  expiresAt DateTime
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  userId    Int
+  user      User      @relation(fields: [userId], references: [id])
+}
+
+enum TokenType {
+  PASSWORD_RESET
+  EMAIL_VERIFICATION
+  API_AUTH
+}
+
+model Post {
+  id        Int        @id @default(autoincrement())
+  userId    Int
+  user      User       @relation(fields: [userId], references: [id])
+  content   String
+  mediaUrls String[]
+  PostLike  PostLike[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+model PostLike {
+  id     Int         @id @default(autoincrement())
+  userId Int
+  user   User        @relation(fields: [userId], references: [id])
+  postId Int
+  post   Post        @relation(fields: [postId], references: [id])
+  type   LikeMethods
+}

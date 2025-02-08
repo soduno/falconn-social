@@ -1,0 +1,24 @@
+{
+  "name": "falconn-social",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start:api": "cd api && npm run start:dev",
+    "start:site": "cd site && npm run dev",
+    "start": "docker-compose up -d && concurrently -k \"npm run start:api\" \"npm run start:site\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "workspaces": [
+    "/api",
+    "/site"
+  ],
+  "dependencies": {
+    "@nestjs/config": "^3.3.0",
+    "@nestjs/serve-static": "^4.0.2",
+    "argon2": "^0.41.1",
+    "concurrently": "^9.1.2"
+  }
+}

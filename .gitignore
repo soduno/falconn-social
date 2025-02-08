@@ -1,11 +1,10 @@
-/api/.env
-/site/.env
+.env
 
-packages/*/package-lock.json
-sample/**/package-lock.json
+package-lock.json
 
-# dependencies
-node_modules/
+.next
+
+node_modules/*
 
 # IDE
 /.idea
@@ -56,7 +55,6 @@ build/config\.gypi
 pnpm-lock.yaml
 /.history
 
-node_modules
 target
 dist
 logs
